@@ -86,7 +86,10 @@
         "groups": [
           {
             "group": "Get started",
-            "pages": []
+            "pages": [
+              "pulse/overview",
+              "pulse/getting-started"
+            ]
           },
           {
             "group": "Using Pulse",
