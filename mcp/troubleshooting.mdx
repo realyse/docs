@@ -1,0 +1,39 @@
+---
+title: "Troubleshooting"
+description: "Fixes for common problems connecting to and using REalyse MCP."
+icon: "life-ring"
+---
+
+<AccordionGroup>
+  <Accordion title="&quot;MCP access is not enabled for your account&quot;">
+    MCP access is switched on per account. Ask your REalyse account manager to enable it, then connect again.
+  </Accordion>
+  <Accordion title="&quot;Subscription expired or upgrade required&quot;">
+    Your REalyse subscription isn't active. Reconnecting won't help until it's renewed. Contact your REalyse account manager.
+  </Accordion>
+  <Accordion title="&quot;Session expired&quot; on the sign-in page">
+    The sign-in page was open for too long before you finished. Go back to your assistant and start the connection again.
+  </Accordion>
+  <Accordion title="The sign-in page doesn't open">
+    Check that you added the server URL exactly as `https://mcp.realyse.com/mcp`, with no headers or tokens. Some clients only start sign-in when you click **Connect** or try to use a tool for the first time.
+  </Accordion>
+  <Accordion title="My assistant was working but now gets sign-in errors">
+    Your session has expired. Assistants that don't support refresh tokens need you to reconnect from time to time. Disconnect and connect again from your assistant's settings.
+  </Accordion>
+  <Accordion title="&quot;MCP monthly row limit reached&quot;">
+    You've used this month's allowance. The message tells you when it resets. Lookup tools such as `resolve_location` still work in the meantime. To raise your allowance, contact your REalyse account manager. See [Usage limits](/mcp/usage-limits).
+  </Accordion>
+  <Accordion title="A trend or statistics request is refused">
+    Trend tools need every requested series to fit in your remaining allowance. Ask for fewer series (for example, fewer crime categories) or wait for the allowance to reset.
+  </Accordion>
+  <Accordion title="My assistant can't find the place I asked about">
+    Try a postcode or a better-known place name. You can also ask for an area around a point, such as "within one mile of Leeds station".
+  </Accordion>
+  <Accordion title="Results look out of date">
+    Ask your assistant when the relevant dataset was last updated. It will call `get_dataset_update_dates`.
+  </Accordion>
+</AccordionGroup>
+
+## Still stuck?
+
+Contact your REalyse account manager. It helps to include the name of the assistant you're using, roughly when the problem happened, and the exact error message.

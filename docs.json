@@ -50,7 +50,9 @@
           },
           {
             "group": "Help",
-            "pages": []
+            "pages": [
+              "mcp/troubleshooting"
+            ]
           }
         ]
       },
