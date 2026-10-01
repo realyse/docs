@@ -9,29 +9,51 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "pages": [
+    "products": [
       {
-        "group": "Getting Started",
+        "product": "Help centre",
+        "icon": "house",
+        "description": "Start here and choose your product",
         "pages": [
-          "index",
-          "quickstart"
+          {
+            "group": "Welcome",
+            "pages": [
+              "index"
+            ]
+          }
         ]
+      },
+      {
+        "product": "Core",
+        "icon": "chart-mixed",
+        "description": "Dashboards for UK property, land and planning data"
+      },
+      {
+        "product": "MCP",
+        "icon": "plug",
+        "description": "REalyse data in AI assistants such as Claude, ChatGPT and Cursor",
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "mcp/overview",
+              "mcp/connect"
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": []
+          },
+          {
+            "group": "Help",
+            "pages": []
+          }
+        ]
+      },
+      {
+        "product": "Pulse"
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",

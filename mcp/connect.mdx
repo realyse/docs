@@ -1,0 +1,70 @@
+---
+title: "Connect an MCP client"
+sidebarTitle: "Connect your assistant"
+description: "Add REalyse MCP to your AI assistant and sign in with your REalyse account."
+icon: "link"
+---
+
+You only need one thing to connect: the REalyse MCP server URL.
+
+```text
+https://mcp.realyse.com/mcp
+```
+
+Don't add headers, tokens or API keys. Your assistant handles sign-in for you.
+
+## Connect
+
+<Steps>
+  <Step title="Add the server">
+    Open your assistant's MCP or connector settings and add a new server with the URL above. The tabs below show where this lives in some common clients.
+  </Step>
+  <Step title="Click Connect">
+    Your browser opens the **Sign in to REalyse** page.
+  </Step>
+  <Step title="Sign in">
+    Enter your REalyse email and password, or choose **Continue with Google** or **Continue with Microsoft**. If your account uses two-step verification, enter your verification code and click **Verify**.
+  </Step>
+  <Step title="Go back to your assistant">
+    When the page says **Connected.**, close the tab and return to your assistant. The REalyse tools are now available.
+  </Step>
+</Steps>
+
+## Where to add the server
+
+<Tabs>
+  <Tab title="Cursor">
+    Add REalyse to your `mcp.json` file (`~/.cursor/mcp.json` for all projects, or `.cursor/mcp.json` in a single project):
+
+    ```json
+    {
+      "mcpServers": {
+        "realyse": {
+          "url": "https://mcp.realyse.com/mcp"
+        }
+      }
+    }
+    ```
+
+    Then open Cursor's MCP settings and click **Connect** next to the REalyse server.
+  </Tab>
+  <Tab title="Claude">
+    Add a custom connector in Claude's connector settings and paste the server URL. Claude opens the REalyse sign-in page when you connect.
+  </Tab>
+  <Tab title="ChatGPT">
+    Add a custom connector in ChatGPT's connector settings and paste the server URL. ChatGPT opens the REalyse sign-in page when you connect.
+  </Tab>
+  <Tab title="Other clients">
+    Any client that supports MCP over HTTP with OAuth sign-in should work. Add the server URL wherever the client lists remote MCP servers and start the connection from there.
+  </Tab>
+</Tabs>
+
+<Note>
+  Assistants change their settings screens often. If the steps above don't match what you see, look for an option to add a remote MCP server or a custom connector.
+</Note>
+
+## Check it's working
+
+Ask your assistant something simple, such as "When was REalyse comparables data last updated?" It should call the `get_dataset_update_dates` tool and reply with dates.
+
+If the connection fails, see [Troubleshooting](/mcp/troubleshooting).
