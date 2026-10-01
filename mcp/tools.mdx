@@ -1,0 +1,80 @@
+---
+title: "Available tools"
+description: "The REalyse data tools your assistant can call, and how they fit together."
+icon: "toolbox"
+---
+
+REalyse MCP gives your assistant 21 tools. All of them are read-only: they look data up and never change anything in your REalyse account.
+
+You don't call these tools yourself. Your assistant picks the right ones based on your question. This page helps you understand what it can do and why it sometimes calls several tools in a row.
+
+## Start with a location
+
+Most data tools need a location. Your assistant first calls `resolve_location` or `resolve_radius_location` to turn a place name, postcode or drawn area into a location token, then passes that token to the data tools.
+
+Location tokens are tied to your account and saved, so your assistant can reuse the same area later in a conversation, or in a new one, without looking it up again. They don't expire.
+
+| Tool | What it does |
+| --- | --- |
+| `resolve_location` | Turns a place name, postcode or drawn polygon into a reusable location token. |
+| `resolve_radius_location` | Builds a catchment around a point, such as "within two miles of King's Cross". |
+
+## Prices, rents and market trends
+
+| Tool | What it does |
+| --- | --- |
+| `search_comparables` | Individual sold prices, asking prices and asking rents, filtered by bedrooms, property type and price. |
+| `get_market_indicators` | Monthly time series for price per square foot, rents (including achieved rents), yields, transactions and days on market, with rolling averages and percentiles. |
+
+## Planning and development
+
+| Tool | What it does |
+| --- | --- |
+| `search_planning_applications` | Planning applications and development schemes, including build-to-rent, unit counts, stage and contractor. |
+| `get_planning_pipeline_stats` | Totals for the planning pipeline in an area, such as gross development value, units, floor area and stages. |
+
+## Land and ownership
+
+| Tool | What it does |
+| --- | --- |
+| `search_land_parcels` | HM Land Registry titles with proprietor and ownership details. Area searches can flag HMOs, brownfield land and green belt. |
+| `get_title_details` | Details for one title number or UPRN, including boundary, tenure and ownership. |
+| `get_title_plan_map` | A satellite map image showing a title's boundary. |
+| `get_land_ownership` | Ownership for a single title, enriched with company register information such as joint proprietors, directors and charges. |
+| `search_land_transactions` | Land and commercial transactions from HM Land Registry price paid data for an area and date range. |
+| `get_land_transactions_by_title` | The full transaction history for one or more title numbers. |
+
+## Area insights
+
+| Tool | What it does |
+| --- | --- |
+| `get_demographics_summary` | Population, unemployment, household tenure, rental affordability and income by age. |
+| `get_crime_trends` | Monthly crime counts by category and sub-category. |
+| `search_points_of_interest` | Nearby schools, transport, places to eat and drink, supermarkets and health services. |
+| `search_epc_certificates` | Energy Performance Certificates, including energy rating, floor area, property type and certificate date. |
+| `get_policy_rates` | Local Housing Allowance (BRMA/LHA), London Living Rent and Community Infrastructure Levy rates. |
+
+## Broad analytical questions
+
+For questions that cut across several datasets, your assistant can ask REalyse to build an analytical report.
+
+| Tool | What it does |
+| --- | --- |
+| `generate_data_report` | Finds and combines the datasets needed to answer a broad question, then returns a report. |
+| `paginate_data_report` | Fetches more rows from a report that has already been generated. |
+
+These two tools work from place names rather than location tokens, so your assistant describes the area in words when it uses them.
+
+## Account and data freshness
+
+| Tool | What it does |
+| --- | --- |
+| `get_dataset_update_dates` | Shows how recent each REalyse dataset is. |
+| `get_current_user` | Shows your profile and how much of your monthly allowance you've used. Not available with team API keys. |
+
+## Tips for better answers
+
+- Name the area clearly. A postcode or a well-known place name works better than a vague description.
+- Say what period you're interested in, such as "since January 2025" or "over the last three years".
+- Ask your assistant to check `get_dataset_update_dates` if you need to know how current the figures are.
+- Large searches use more of your allowance. See [Usage limits](/mcp/usage-limits).

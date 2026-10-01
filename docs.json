@@ -37,12 +37,15 @@
             "group": "Get started",
             "pages": [
               "mcp/overview",
-              "mcp/connect"
+              "mcp/connect",
+              "mcp/authentication"
             ]
           },
           {
             "group": "Reference",
-            "pages": []
+            "pages": [
+              "mcp/tools"
+            ]
           },
           {
             "group": "Help",

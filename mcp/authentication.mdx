@@ -1,0 +1,61 @@
+---
+title: "Sign-in and access"
+description: "How REalyse MCP signs you in, how sessions renew, and how to use a team API key for scripts."
+icon: "key"
+---
+
+REalyse MCP uses your normal REalyse account. When you connect, you sign in on a REalyse page and your assistant receives a token for your account. Your assistant never sees your password.
+
+The token gives your assistant the same data access as your REalyse account. Anything you look up through MCP counts towards your [monthly allowance](/mcp/usage-limits).
+
+## Who can connect
+
+MCP access has to be enabled on your REalyse account. Without it, the sign-in page shows this message after you enter your details:
+
+> MCP access is not enabled for your account. Contact REalyse to upgrade.
+
+Your REalyse subscription also needs to be active. If it has expired, sign-in fails with **Subscription expired or upgrade required**.
+
+## Sign-in options
+
+You can sign in with:
+
+- Your REalyse email and password
+- **Continue with Google**
+- **Continue with Microsoft**
+
+If two-step verification is turned on for your account, you'll be asked for a verification code after your password.
+
+## Staying signed in
+
+Assistants that support refresh tokens renew your session in the background, so you don't need to reconnect each time you use them. Assistants that don't support refresh tokens will ask you to connect again when the session expires.
+
+To disconnect, remove the REalyse server from your assistant's MCP or connector settings.
+
+## Team API keys for scripts
+
+If REalyse has issued your team an API key, you can call REalyse MCP from scripts or automation without the browser sign-in. Send the key in the `Authorization` header of each request:
+
+```text
+Authorization: Bearer <base64 of ":" followed by your API key>
+```
+
+For example, in a shell:
+
+```bash
+TOKEN=$(printf ':%s' "$REALYSE_API_KEY" | base64 | tr -d '\n')
+curl -X POST https://mcp.realyse.com/mcp \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
+  --data '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'
+```
+
+When you use a team API key:
+
+- Usage counts against your team's monthly allowance, not an individual user's.
+- The `get_current_user` tool isn't available, because the key belongs to a team rather than a person.
+
+<Warning>
+  Treat your API key like a password. Don't commit it to source control or share it in chat.
+</Warning>
