@@ -26,7 +26,30 @@
       {
         "product": "Core",
         "icon": "chart-mixed",
-        "description": "Dashboards for UK property, land and planning data"
+        "description": "Dashboards for UK property, land and planning data",
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "core/overview",
+              "core/getting-started"
+            ]
+          },
+          {
+            "group": "Using Core",
+            "pages": [
+              "core/projects",
+              "core/data-and-locations",
+              "core/exports"
+            ]
+          },
+          {
+            "group": "Account",
+            "pages": [
+              "core/account"
+            ]
+          }
+        ]
       },
       {
         "product": "MCP",
@@ -57,7 +80,23 @@
         ]
       },
       {
-        "product": "Pulse"
+        "product": "Pulse",
+        "icon": "wave-pulse",
+        "description": "Property valuations, rental reports and market trends",
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": []
+          },
+          {
+            "group": "Using Pulse",
+            "pages": []
+          },
+          {
+            "group": "Account",
+            "pages": []
+          }
+        ]
       }
     ]
   },
