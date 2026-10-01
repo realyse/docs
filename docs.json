@@ -1,37 +1,112 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "name": "REalyse",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#705FD3",
+    "light": "#A99FE5",
+    "dark": "#443A81"
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "pages": [
+    "products": [
       {
-        "group": "Getting Started",
+        "product": "Help centre",
+        "icon": "house",
+        "description": "Start here and choose your product",
         "pages": [
-          "index",
-          "quickstart"
+          {
+            "group": "Welcome",
+            "pages": [
+              "index"
+            ]
+          }
+        ]
+      },
+      {
+        "product": "Core",
+        "icon": "chart-mixed",
+        "description": "Dashboards for UK property, land and planning data",
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "core/overview",
+              "core/getting-started"
+            ]
+          },
+          {
+            "group": "Using Core",
+            "pages": [
+              "core/projects",
+              "core/data-and-locations",
+              "core/exports"
+            ]
+          },
+          {
+            "group": "Account",
+            "pages": [
+              "core/account"
+            ]
+          }
+        ]
+      },
+      {
+        "product": "MCP",
+        "icon": "plug",
+        "description": "REalyse data in AI assistants such as Claude, ChatGPT and Cursor",
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "mcp/overview",
+              "mcp/connect",
+              "mcp/authentication"
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              "mcp/tools",
+              "mcp/usage-limits"
+            ]
+          },
+          {
+            "group": "Help",
+            "pages": [
+              "mcp/troubleshooting"
+            ]
+          }
+        ]
+      },
+      {
+        "product": "Pulse",
+        "icon": "wave-pulse",
+        "description": "Property valuations, rental reports and market trends",
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "pulse/overview",
+              "pulse/getting-started"
+            ]
+          },
+          {
+            "group": "Using Pulse",
+            "pages": [
+              "pulse/properties-and-valuations",
+              "pulse/reports"
+            ]
+          },
+          {
+            "group": "Account",
+            "pages": [
+              "pulse/account-and-billing"
+            ]
+          }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",
@@ -41,14 +116,9 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:support@mintlify.com"
+        "href": "mailto:support@realyse.com"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
-    }
+    ]
   },
   "contextual": {
     "options": [
@@ -62,11 +132,8 @@
       "vscode"
     ]
   },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
+  "description": "Help and guides for REalyse Core, REalyse MCP and REalyse Pulse.",
+  "fonts": {
+    "family": "Lato"
   }
 }
