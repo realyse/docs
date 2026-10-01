@@ -68,6 +68,7 @@
             "group": "Reference",
             "pages": [
               "mcp/tools",
+              "mcp/data-coverage",
               "mcp/usage-limits"
             ]
           },

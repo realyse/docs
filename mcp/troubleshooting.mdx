@@ -5,6 +5,15 @@ icon: "life-ring"
 ---
 
 <AccordionGroup>
+  <Accordion title="Claude on a Team or Enterprise plan won't let me add the connector">
+    An Owner or Primary Owner has to add the custom connector for the organisation first. After that, connect it from **Customize → Connectors** with your own REalyse account. See [Connect your assistant](/mcp/connect#claude) and Anthropic's [custom connector guide](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp).
+  </Accordion>
+  <Accordion title="ChatGPT has no place to add a custom server">
+    Custom MCP servers in ChatGPT need developer mode, which is on the web app and on paid plans (Pro, Plus, Business, Enterprise or Education). Follow [Connect and test your plugin](https://developers.openai.com/plugins/deploy/connect-chatgpt). Details are in [Connect your assistant](/mcp/connect#chatgpt).
+  </Accordion>
+  <Accordion title="Copilot Studio says it can't create the MCP server">
+    The connector was probably left behind in Dataverse from an earlier attempt. Delete it from **Custom connectors** in the same Power Platform environment, wait a few minutes, and try again with the server name `REalyse`. Full steps are in [Create failed in Copilot Studio](/mcp/connect#create-failed-in-copilot-studio).
+  </Accordion>
   <Accordion title="&quot;MCP access is not enabled for your account&quot;">
     MCP access is switched on per account. Ask your REalyse account manager to enable it, then connect again.
   </Accordion>
@@ -21,7 +30,7 @@ icon: "life-ring"
     Your session has expired. Assistants that don't support refresh tokens need you to reconnect from time to time. Disconnect and connect again from your assistant's settings.
   </Accordion>
   <Accordion title="&quot;MCP monthly row limit reached&quot;">
-    You've used this month's allowance. The message tells you when it resets. Lookup tools such as `resolve_location` still work in the meantime. To raise your allowance, contact your REalyse account manager. See [Usage limits](/mcp/usage-limits).
+    You've used this month's allowance. The default is 10,000 rows, unless your account manager has set a different limit. The message tells you when it resets. Lookup tools such as `resolve_location` still work in the meantime. To raise your allowance, contact your REalyse account manager. See [Usage limits](/mcp/usage-limits).
   </Accordion>
   <Accordion title="A trend or statistics request is refused">
     Trend tools need every requested series to fit in your remaining allowance. Ask for fewer series (for example, fewer crime categories) or wait for the allowance to reset.

@@ -1,70 +1,162 @@
 ---
 title: "Connect an MCP client"
 sidebarTitle: "Connect your assistant"
-description: "Add REalyse MCP to your AI assistant and sign in with your REalyse account."
+description: "Add REalyse MCP to Claude, ChatGPT, Copilot Studio, Cursor, VS Code or another remote MCP client."
 icon: "link"
 ---
 
-You only need one thing to connect: the REalyse MCP server URL.
+Add REalyse as a remote MCP server, then sign in with your REalyse account. Every client uses the same server URL:
 
 ```text
 https://mcp.realyse.com/mcp
 ```
 
-Don't add headers, tokens or API keys. Your assistant handles sign-in for you.
+Choose OAuth when the client asks how to authenticate. Leave client ID and client secret empty. REalyse does not issue OAuth client credentials; the client registers itself during sign-in.
 
-## Connect
+Your browser opens **Sign in to REalyse**. Use your email and password, **Continue with Google**, or **Continue with Microsoft**. If two-step verification is on, enter the code and click **Verify**. When the page says **Connected.**, go back to the assistant.
 
-<Steps>
-  <Step title="Add the server">
-    Open your assistant's MCP or connector settings and add a new server with the URL above. The tabs below show where this lives in some common clients.
-  </Step>
-  <Step title="Click Connect">
-    Your browser opens the **Sign in to REalyse** page.
-  </Step>
-  <Step title="Sign in">
-    Enter your REalyse email and password, or choose **Continue with Google** or **Continue with Microsoft**. If your account uses two-step verification, enter your verification code and click **Verify**.
-  </Step>
-  <Step title="Go back to your assistant">
-    When the page says **Connected.**, close the tab and return to your assistant. The REalyse tools are now available.
-  </Step>
-</Steps>
+The sections below list the values that stay the same, and link to each vendor's current guide for where those values go. Screen layouts change often, so follow the vendor page if it disagrees with an older walkthrough.
 
-## Where to add the server
+For sessions, disconnecting, and team API keys, see [Sign-in and access](/mcp/authentication).
 
-<Tabs>
-  <Tab title="Cursor">
-    Add REalyse to your `mcp.json` file (`~/.cursor/mcp.json` for all projects, or `.cursor/mcp.json` in a single project):
+## Claude
 
-    ```json
-    {
-      "mcpServers": {
-        "realyse": {
-          "url": "https://mcp.realyse.com/mcp"
-        }
-      }
+Custom connectors are available on Free, Pro, Max, Team and Enterprise plans. Free accounts can add one custom connector.
+
+On Team and Enterprise, an Owner or Primary Owner adds the connector for the organisation before anyone else can use it. In organisation connector settings, add a custom web connector and paste `https://mcp.realyse.com/mcp`. Leave the optional OAuth client ID and client secret blank. After the connector is on the organisation, each person opens **Customize → Connectors**, finds the connector labelled **Custom**, and clicks **Connect** to sign in with their own REalyse account.
+
+On Free, Pro and Max, add the custom connector yourself with the same URL.
+
+Anthropic's current steps:
+
+- [Get started with custom connectors using remote MCP](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp)
+- [Use connectors to extend Claude's capabilities](https://support.claude.com/en/articles/11176164-use-connectors-to-extend-claude-s-capabilities)
+- [Connectors in Claude](https://claude.com/docs/connectors/getting-started)
+
+In a chat, turn REalyse on from the connectors control in the message box. To check the connection, ask who you are according to the REalyse MCP.
+
+## ChatGPT
+
+You need a paid ChatGPT plan: Pro, Plus, Business, Enterprise or Education. Developer mode, which is how custom MCP servers are added, is available on the web app.
+
+<Warning>
+  Developer mode gives ChatGPT full MCP client access, including write tools on any server you connect. REalyse tools only read data. Review what you approve, and only connect servers you trust. OpenAI describes the mode in [ChatGPT Developer mode](https://developers.openai.com/api/docs/guides/developer-mode).
+</Warning>
+
+Follow [Connect and test your plugin](https://developers.openai.com/plugins/deploy/connect-chatgpt) for the current screens. Use these values:
+
+- Server URL: `https://mcp.realyse.com/mcp`
+- Authentication: OAuth
+
+Sign in with your REalyse account when ChatGPT asks. In a new chat, select developer mode and the REalyse app before you ask a question.
+
+## Cursor
+
+Cursor documents remote MCP servers in [Model Context Protocol (MCP)](https://cursor.com/docs/mcp). Add REalyse to `~/.cursor/mcp.json` for every project, or to `.cursor/mcp.json` inside one project:
+
+```json
+{
+  "mcpServers": {
+    "realyse": {
+      "url": "https://mcp.realyse.com/mcp"
     }
-    ```
+  }
+}
+```
 
-    Then open Cursor's MCP settings and click **Connect** next to the REalyse server.
-  </Tab>
-  <Tab title="Claude">
-    Add a custom connector in Claude's connector settings and paste the server URL. Claude opens the REalyse sign-in page when you connect.
-  </Tab>
-  <Tab title="ChatGPT">
-    Add a custom connector in ChatGPT's connector settings and paste the server URL. ChatGPT opens the REalyse sign-in page when you connect.
-  </Tab>
-  <Tab title="Other clients">
-    Any client that supports MCP over HTTP with OAuth sign-in should work. Add the server URL wherever the client lists remote MCP servers and start the connection from there.
-  </Tab>
-</Tabs>
+Save the file, then start login from Cursor's MCP settings. Cursor opens the REalyse sign-in page. Leave out the static `auth` client credentials Cursor documents for some other servers.
 
-<Note>
-  Assistants change their settings screens often. If the steps above don't match what you see, look for an option to add a remote MCP server or a custom connector.
-</Note>
+You can also open the MCP config from Cursor settings (**Tools & Integrations**, or **MCP** in some versions) and use **New MCP Server** or **Add Custom MCP**.
+
+## Visual Studio Code
+
+VS Code with GitHub Copilot documents remote servers in [Add and manage MCP servers](https://code.visualstudio.com/docs/agent-customization/mcp-servers). Add this to your user config (**MCP: Open User Configuration** in the Command Palette) or to `.vscode/mcp.json` in a project:
+
+```json
+{
+  "servers": {
+    "realyse": {
+      "type": "http",
+      "url": "https://mcp.realyse.com/mcp"
+    }
+  }
+}
+```
+
+Save the file. If the server is not running, open the Command Palette and run **MCP: List Servers**, then start **realyse**. Complete the REalyse sign-in in the browser. Ask a question from GitHub Copilot Chat and approve the tool call when VS Code prompts you.
+
+The configuration reference is in [MCP configuration reference](https://code.visualstudio.com/docs/copilot/reference/mcp-configuration).
+
+## Microsoft Copilot Studio
+
+You need permission to configure an agent, an agent to attach the server to, and an active REalyse subscription.
+
+Microsoft documents the wizard in [Connect your agent to an existing MCP server](https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-add-existing-server-to-agent). Copilot Studio also has a newer agent experience with different menus, described in [Add an MCP server to your agent](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/tools-add-mcp-server). Use the page that matches the experience you see. The values are the same in both:
+
+- Server name: `REalyse`. Avoid a period or a version suffix such as `REalyse 2.0`. Copilot Studio turns the name into a connector name, and those characters fail more often.
+- Server description: a short line such as `Connect this agent to REalyse UK property data`.
+- Server URL: `https://mcp.realyse.com/mcp`
+- Authentication: OAuth 2.0
+- Configuration type: Dynamic discovery, sometimes labelled Dynamic
+
+Do not choose **Manual**. That option asks for a client ID and client secret, and REalyse does not issue those.
+
+After the server is created, create a new connection, sign in with your REalyse account, and add the tool to the agent. Open the REalyse tool on the agent to see the tools it exposes.
+
+### Create failed in Copilot Studio
+
+**Can't create MCP server. Try again.** appears when you submit the form, before Copilot Studio has contacted REalyse. Copilot Studio failed to create the Power Platform custom connector it builds for the server.
+
+The usual cause is a connector left in Dataverse from an earlier attempt. It does not show in Copilot Studio, and a later attempt collides with it even when you use a new server name. Microsoft describes this in [Adding MCP Server as Tool in Copilot Studio fails](https://learn.microsoft.com/en-us/answers/questions/5862279/adding-mcp-server-as-tool-in-copilot-studio-fails).
+
+1. Open [make.powerapps.com](https://make.powerapps.com) and confirm you are in the same environment as the agent.
+2. Open **Custom connectors** and delete any connector named like the REalyse server.
+3. Wait two or three minutes, then try again with the server name `REalyse`.
+
+If it still fails:
+
+- Creating a custom connector needs the System Administrator role on that Power Platform environment.
+- Data loss prevention policies often block custom connectors in the default environment. MCP tools go through a Power Platform connector, so those policies apply. Try a dedicated development environment. See [MCP servers and data policies](https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-add-existing-server-to-agent#mcp-servers-and-data-policies) and [Configure data policies for agents](https://learn.microsoft.com/en-us/microsoft-copilot-studio/admin-data-loss-prevention).
+- If the form says the server URL is incomplete while `https://mcp.realyse.com/mcp` is already filled in, click outside the URL field and submit again.
+
+You can also set the configuration type to Dynamic and enter the endpoints yourself. Registration is the same, and discovery is skipped:
+
+- Authorization URL: `https://mcp.realyse.com/oauth/authorize`
+- Token URL: `https://mcp.realyse.com/oauth/token`
+
+## Other clients
+
+Any client that supports remote MCP over Streamable HTTP and OAuth can use `https://mcp.realyse.com/mcp`. The [Model Context Protocol](https://modelcontextprotocol.io/docs/develop/connect-remote-servers) documents how clients connect to remote servers. Property names differ: some use `url`, some use `serverUrl`, and VS Code uses a `servers` object with `"type": "http"`.
+
+Clients that expect `serverUrl`:
+
+```json
+{
+  "mcpServers": {
+    "realyse": {
+      "serverUrl": "https://mcp.realyse.com/mcp"
+    }
+  }
+}
+```
+
+If the client only runs local stdio servers, bridge the remote server with [mcp-remote](https://github.com/geelen/mcp-remote). You need [Node.js](https://nodejs.org/) so `npx` can run:
+
+```json
+{
+  "mcpServers": {
+    "realyse": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.realyse.com/mcp"]
+    }
+  }
+}
+```
+
+For unattended access, send a [team API key](/mcp/authentication#team-api-keys-for-scripts) in the `Authorization` header. Keep the key in an environment variable. With a team API key, `get_current_user` is unavailable, so test with a data question such as recent sales trends in a postcode.
 
 ## Check it's working
 
-Ask your assistant something simple, such as "When was REalyse comparables data last updated?" It should call the `get_dataset_update_dates` tool and reply with dates.
+Ask when REalyse comparables data was last updated. The assistant should call `get_dataset_update_dates` and reply with dates.
 
 If the connection fails, see [Troubleshooting](/mcp/troubleshooting).
