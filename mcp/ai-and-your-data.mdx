@@ -1,0 +1,55 @@
+---
+title: "AI and your data"
+sidebarTitle: "AI and your data"
+description: "How REalyse MCP fits with your assistant, your subscription terms and the REalyse privacy policy."
+icon: "shield-halved"
+---
+
+You connect an assistant to your existing REalyse account. The data licence is the same one that covers REalyse Core and the API. This page describes what the connection adds: who writes the answer, what REalyse receives, and where the results go.
+
+Read it with the terms that apply to your subscription. The standard documents on the REalyse website are the [Terms & Conditions](https://cdn.prod.website-files.com/61acde1e4b656fb305b1f189/6614d3b39bb33b0cb1c66b7c_REalyse%20-%20Terms%20of%20Use%20(Enterprise)%20(05.09.2023).pdf), the [API Terms of Use](https://cdn.prod.website-files.com/61acde1e4b656fb305b1f189/62babacbf04e59f387888359_REalyse%2B-%2BTerms%2Bof%2BUse%2B(API).pdf) and the [privacy policy](https://cdn.prod.website-files.com/61acde1e4b656fb305b1f189/63edca4f3f550933ece5a0c9_REalyse%20-%20Privacy%20Policy.pdf). If your organisation has a signed agreement, that agreement applies to you.
+
+## What each document is for
+
+| Document | What it covers |
+| --- | --- |
+| Terms & Conditions, and the API Terms of Use | Who may use REalyse, the licence for the datasets, and the limits on reuse, resale and redistribution. |
+| Privacy policy | Personal data REalyse holds about you as a customer: your account, sign-in, billing and how you use the service, plus your rights and how to contact us. |
+| This page | What happens to a question, and to the data that comes back, when an assistant calls REalyse MCP. |
+
+## Who writes the answer
+
+The assistant you connect is the model. That might be Claude, ChatGPT, Microsoft Copilot Studio, Cursor, Visual Studio Code, or another MCP client. REalyse supplies the data lookups. The conversation stays in the assistant. REalyse does not receive the conversation text.
+
+When the assistant needs REalyse data, it sends a tool call. REalyse runs that lookup and returns the result. The assistant then writes the reply you see. The wording is the assistant's, so two people can ask similar questions and get different write-ups.
+
+What that assistant stores, logs or uses to train its models is covered by your agreement with its provider. REalyse is not a party to that agreement. If your organisation limits training on customer content, or limits sending licensed data to a third party, set that with the assistant's provider before you connect.
+
+## What REalyse keeps
+
+REalyse records the lookup: which tool ran, and the settings sent with it, such as a place, a date range or a filter. That is the same kind of usage record as a search in REalyse Core or a call to the API.
+
+REalyse also keeps:
+
+- The sign-in session that ties the assistant to your REalyse account. The assistant does not receive your password. See [Sign-in and access](/mcp/authentication).
+- Location tokens from `resolve_location` and `resolve_radius_location`. They are saved against your account so a later question can reuse the same area, and they do not expire. See [Available tools](/mcp/tools).
+- Your monthly row allowance. See [Usage limits](/mcp/usage-limits).
+- A title-plan image, when the assistant asks for a map of a title boundary.
+
+## The data in the result
+
+The tools are read-only. They look data up and leave your account, projects and saved work unchanged.
+
+Some results include personal data about other people, such as proprietor and director names on a land title. Demographics and crime tools return statistics for an area. Those figures describe the area. They are not a profile of you, and they are not a criminal record for a named person.
+
+The result goes back to your assistant so it can write the answer. Your data licence still applies to those figures, and to any summary the assistant writes from them. Publish or reuse them only within that licence. If the assistant's provider can train on chat content, turn that off for REalyse results unless your agreement with REalyse allows it.
+
+## Analytical reports
+
+Most tools call REalyse data directly. `generate_data_report` and `paginate_data_report` work differently. They send the question and a place name to a separate analytical service, which chooses and combines datasets and returns a report. They use a place name, not a location token.
+
+The report is still REalyse data. Ask the assistant to check `get_dataset_update_dates` when you need to know how current the figures are. [Data coverage](/mcp/data-coverage) explains what that report cannot fill in.
+
+## Check the figures before you rely on them
+
+Numbers in a tool result are REalyse data. The sentences around them are the assistant's. Check the numbers in the tool result, or in REalyse Core, before you use them in a valuation, a credit paper or an investment note. Treat the assistant's wording as a summary of the tool result. REalyse is not providing a valuation or other regulated advice through that summary.

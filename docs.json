@@ -75,6 +75,7 @@
           {
             "group": "Help",
             "pages": [
+              "mcp/ai-and-your-data",
               "mcp/troubleshooting"
             ]
           }
