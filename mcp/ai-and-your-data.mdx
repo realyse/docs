@@ -7,7 +7,7 @@ icon: "shield-halved"
 
 You connect an assistant to your existing REalyse account. The data licence is the same one that covers REalyse Core and the API. This page describes what the connection adds: who writes the answer, what REalyse receives, and where the results go.
 
-Read it with the terms that apply to your subscription. The standard documents on the REalyse website are the [Terms & Conditions](https://cdn.prod.website-files.com/61acde1e4b656fb305b1f189/6614d3b39bb33b0cb1c66b7c_REalyse%20-%20Terms%20of%20Use%20(Enterprise)%20(05.09.2023).pdf), the [API Terms of Use](https://cdn.prod.website-files.com/61acde1e4b656fb305b1f189/62babacbf04e59f387888359_REalyse%2B-%2BTerms%2Bof%2BUse%2B(API).pdf) and the [privacy policy](https://cdn.prod.website-files.com/61acde1e4b656fb305b1f189/63edca4f3f550933ece5a0c9_REalyse%20-%20Privacy%20Policy.pdf). If your organisation has a signed agreement, that agreement applies to you.
+Read it with the terms that apply to your subscription. The standard documents on the REalyse website are the [Terms & Conditions](https://cdn.prod.website-files.com/61acde1e4b656fb305b1f189/6614d3b39bb33b0cb1c66b7c_REalyse%20-%20Terms%20of%20Use%20%28Enterprise%29%20%2805.09.2023%29.pdf), the [API Terms of Use](https://cdn.prod.website-files.com/61acde1e4b656fb305b1f189/62babacbf04e59f387888359_REalyse%2B-%2BTerms%2Bof%2BUse%2B%28API%29.pdf) and the [privacy policy](https://cdn.prod.website-files.com/61acde1e4b656fb305b1f189/63edca4f3f550933ece5a0c9_REalyse%20-%20Privacy%20Policy.pdf). If your organisation has a signed agreement, that agreement applies to you.
 
 ## What each document is for
 
@@ -38,7 +38,7 @@ REalyse also keeps:
 
 ## The data in the result
 
-The tools are read-only. They look data up and leave your account, projects and saved work unchanged.
+The tools are read-only. A lookup does not change your account, projects or saved work.
 
 Some results include personal data about other people, such as proprietor and director names on a land title. Demographics and crime tools return statistics for an area. Those figures describe the area. They are not a profile of you, and they are not a criminal record for a named person.
 
@@ -46,7 +46,7 @@ The result goes back to your assistant so it can write the answer. Your data lic
 
 ## Analytical reports
 
-Most tools call REalyse data directly. `generate_data_report` and `paginate_data_report` work differently. They send the question and a place name to a separate analytical service, which chooses and combines datasets and returns a report. They use a place name, not a location token.
+Most tools call REalyse data directly. `generate_data_report` and `paginate_data_report` work differently. They send the question and a place name to a separate analytical service, which chooses and combines datasets and returns a report. They work from a place name rather than a location token.
 
 The report is still REalyse data. Ask the assistant to check `get_dataset_update_dates` when you need to know how current the figures are. [Data coverage](/mcp/data-coverage) explains what that report cannot fill in.
 
