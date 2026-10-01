@@ -1,33 +1,57 @@
-> **First-time setup**: Customize this file for your project. Prompt the user to customize this file for their project.
-> For Mintlify product knowledge (components, configuration, writing standards),
-> install the Mintlify skill: `npx skills add https://mintlify.com/docs`
+# AGENTS.md
 
-# Documentation project instructions
+## What this repo is
 
-## About this project
+**`docs`** — customer-facing help centre for REalyse Core, REalyse MCP, and REalyse Pulse, built with Mintlify. Pushes to `main` deploy to production through the Mintlify GitHub app.
 
-- This is a documentation site built on [Mintlify](https://mintlify.com)
-- Pages are MDX files with YAML frontmatter
-- Configuration lives in `docs.json`
-- Use the Mintlify MCP server, `https://mcp.mintlify.com`, to edit content and settings via MCP
-- Use the Mintlify docs MCP server, `https://www.mintlify.com/docs/mcp`, to query information about using Mintlify via MCP
+## Company standards
 
-## Terminology
+Shared engineering rules live in `realyse/standards`, not this repo. **This file wins** for this repository's folders, commands, and project-specific behaviour.
 
-{/* Add product-specific terms and preferred usage */}
-{/* Example: Use "workspace" not "project", "member" not "user" */}
+Locate a checkout, in order:
 
-## Style preferences
+1. A workspace folder named `standards`.
+2. Sibling `../standards`, or `../core/standards` when this clone sits under `core/`.
+3. `./.realyse-standards` (gitignored; do not commit it).
 
-{/* Add any project-specific style rules below */}
+If none exist:
 
-- Use active voice and second person ("you")
-- Keep sentences concise — one idea per sentence
-- Use sentence case for headings
-- Bold for UI elements: Click **Settings**
-- Code formatting for file names, commands, paths, and code references
+```bash
+git clone git@github.com:realyse/standards.git .realyse-standards
+```
 
-## Content boundaries
+Then read that checkout's `AGENTS.md` and `docs/contributing/git-and-reviews.md`. Do not treat a GitHub URL as already-loaded rules.
 
-{/* Define what should and shouldn't be documented */}
-{/* Example: Don't document internal admin features */}
+## Where to change things
+
+| Task | Location |
+|---|---|
+| Help pages | `core/`, `mcp/`, `pulse/` (`.mdx` with `title` and `description`) |
+| Navigation and site config | `docs.json` |
+| Home page | `index.mdx` |
+| Brand assets | `logo/`, `favicon.svg` |
+| Drafts (unpublished) | `drafts/` or `*.draft.mdx` |
+
+A new page appears on the site only after its path, without the extension, is listed in `docs.json`. `.mintignore` keeps `drafts/` and `*.draft.mdx` out of the published site.
+
+## How to run it
+
+Install the Mintlify CLI if needed (`npm i -g mint`), then from this repository root:
+
+```bash
+mint dev
+```
+
+The preview runs at `http://localhost:3000`. If it does not start, run `mint update`. If a page returns 404, confirm you are in the folder that contains `docs.json` and that the page is listed in its navigation.
+
+For Mintlify component and configuration reference, install the Mintlify skill: `npx skills add https://mintlify.com/docs`.
+
+**Branch:** `main`.
+
+## Style
+
+Write for customers. Use active voice and second person ("you"). Keep sentences to one idea. Use sentence case for headings. Bold UI labels, as in Click **Settings**. Use code formatting for file names, commands, paths, and code references.
+
+Product names are REalyse Core, REalyse MCP, and REalyse Pulse. Use British spelling, as in "help centre".
+
+This site covers customer help for those three products. Internal engineering rules stay in `realyse/standards`. Customer questions go to support@realyse.com.
