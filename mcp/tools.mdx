@@ -23,8 +23,8 @@ Location tokens are tied to your account and saved, so your assistant can reuse 
 
 | Tool | What it does |
 | --- | --- |
-| `search_comparables` | Individual sold prices, asking prices and asking rents, filtered by bedrooms, property type and price. |
-| `get_market_indicators` | Monthly time series for price per square foot, rents (including achieved rents), yields, transactions and days on market, with rolling averages and percentiles. |
+| `search_comparables` | Individual sold prices, asking prices and asking rents, filtered by bedrooms, property type and price. Achieved rents are not in this list. |
+| `get_market_indicators` | Monthly time series for price per square foot, asking and achieved rents, asking student rents, yields, transactions and days on market, with rolling averages and percentiles. |
 
 ## Planning and development
 
@@ -37,10 +37,10 @@ Location tokens are tied to your account and saved, so your assistant can reuse 
 
 | Tool | What it does |
 | --- | --- |
-| `search_land_parcels` | HM Land Registry titles with proprietor and ownership details. Area searches can flag HMOs, brownfield land and green belt. |
+| `search_land_parcels` | HM Land Registry titles with proprietor and ownership details. Area searches can flag HMOs, brownfield land and green belt. Licence details are included when REalyse has them. A title can match the HMO filter without a licence record. |
 | `get_title_details` | Details for one title number or UPRN, including boundary, tenure and ownership. |
 | `get_title_plan_map` | A satellite map image showing a title's boundary. |
-| `get_land_ownership` | Ownership for a single title, enriched with company register information such as joint proprietors, directors and charges. |
+| `get_land_ownership` | Ownership for a single title, enriched with company register information such as joint proprietors, directors and charges. One title at a time, and rate-limited. |
 | `search_land_transactions` | Land and commercial transactions from HM Land Registry price paid data for an area and date range. |
 | `get_land_transactions_by_title` | The full transaction history for one or more title numbers. |
 
@@ -78,3 +78,9 @@ These two tools work from place names rather than location tokens, so your assis
 - Say what period you're interested in, such as "since January 2025" or "over the last three years".
 - Ask your assistant to check `get_dataset_update_dates` if you need to know how current the figures are.
 - Large searches use more of your allowance. See [Usage limits](/mcp/usage-limits).
+
+## What MCP does not include
+
+MCP does not cover every dataset and filter in REalyse Core. [Data coverage](/mcp/data-coverage) lists the gaps, including official Land Registry documents, valuation requests, most policy map layers, and several demographic indicators.
+
+Distressed-asset data is not available. `generate_data_report` answers broad questions through a separate analytical service. It does not fill those gaps.
