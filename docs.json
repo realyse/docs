@@ -93,7 +93,9 @@
           },
           {
             "group": "Using Pulse",
-            "pages": []
+            "pages": [
+              "pulse/properties-and-valuations"
+            ]
           },
           {
             "group": "Account",
