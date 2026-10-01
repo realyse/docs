@@ -1,55 +1,58 @@
-# Mintlify Starter Kit
+# REalyse help centre
 
-Use the starter kit to get your docs deployed and ready to customize.
+Customer-facing help and guides for REalyse products, built with [Mintlify](https://mintlify.com). Pushes to `main` deploy to production automatically through the Mintlify GitHub app.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+## What's in here
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+The site is split into three products, each with its own tab in the navigation.
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
+| Folder | Product | Covers |
+|---|---|---|
+| `core/` | REalyse Core | Projects, data and locations, exports, account |
+| `mcp/` | REalyse MCP | Connecting AI assistants, authentication, tools, data coverage, usage limits, troubleshooting |
+| `pulse/` | REalyse Pulse | Property valuations, reports, account and billing |
+
+Other files:
+
+- `index.mdx` is the help centre home page.
+- `docs.json` holds site configuration and navigation. A new page only appears on the site once it's listed here.
+- `logo/` and `favicon.svg` are brand assets.
+- `AGENTS.md` has writing and style instructions for AI tools.
+
+## Run it locally
+
+Install the Mintlify CLI:
+
+```bash
+npm i -g mint
+```
+
+From the repository root, where `docs.json` lives, run:
+
+```bash
+mint dev
+```
+
+The preview runs at `http://localhost:3000`. If it doesn't start, run `mint update` to get the latest CLI. If a page returns 404, check that you're running from the folder that contains `docs.json` and that the page is listed in its navigation.
+
+## Adding or changing pages
+
+1. Write the page as an `.mdx` file with YAML frontmatter (`title` and `description` at minimum) in the right product folder.
+2. Add the page path, without the extension, to the right group in `docs.json`.
+3. Preview it with `mint dev`, then open a pull request against `main`.
+
+Put work in progress under `drafts/` or name it `*.draft.mdx`. `.mintignore` keeps both out of the published site.
+
+Follow the style rules in `AGENTS.md`: use active voice, address the reader as "you", use sentence case for headings, and bold UI labels.
 
 ## AI-assisted writing
 
-Set up your AI coding tool to work with Mintlify:
+To give your AI coding tool Mintlify's component reference and writing guidance, run:
 
 ```bash
 npx skills add https://mintlify.com/docs
 ```
 
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
+## Support
 
-See the [AI tools guides](/ai-tools) for tool-specific setup.
-
-## Development
-
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
-
-```
-npm i -g mint
-```
-
-Run the following command at the root of your documentation, where your `docs.json` is located:
-
-```
-mint dev
-```
-
-View your local preview at `http://localhost:3000`.
-
-## Publishing changes
-
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
-
-## Need help?
-
-### Troubleshooting
-
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
-
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+Customer questions go to [support@realyse.com](mailto:support@realyse.com).
