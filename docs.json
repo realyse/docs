@@ -94,12 +94,15 @@
           {
             "group": "Using Pulse",
             "pages": [
-              "pulse/properties-and-valuations"
+              "pulse/properties-and-valuations",
+              "pulse/reports"
             ]
           },
           {
             "group": "Account",
-            "pages": []
+            "pages": [
+              "pulse/account-and-billing"
+            ]
           }
         ]
       }
