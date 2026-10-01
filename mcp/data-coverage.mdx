@@ -1,0 +1,153 @@
+---
+title: "Data coverage"
+description: "Core datasets and filters that REalyse MCP does not expose, or exposes with fewer options than the Core platform."
+icon: "database"
+sidebarTitle: "Data coverage"
+---
+
+REalyse MCP uses the same underlying data as REalyse Core, but it does not expose every dataset, map layer or filter. This page is the list to check when a question works in Core and the assistant cannot answer it the same way.
+
+`generate_data_report` answers broad questions through a separate analytical service. A report is not a substitute for a dataset that is missing from the tools below.
+
+Pulse is a separate product and is not covered here.
+
+## Summary
+
+| Core dataset | In MCP | Notes |
+| --- | --- | --- |
+| Comparables (sold, asking, asking rent) | Partial | Listings are available. Many specialist filters are not. |
+| Markets (time series) | Partial | Sales, rents, transactions and student rents are available. Some categories and toggles are not. |
+| Planning applications | Partial | Search and pipeline statistics are available. Some filters are not. |
+| Construction pipeline | No | Units in construction by construction stage. MCP has no construction-stage breakdown. |
+| Land and ownership (HM Land Registry titles) | Partial | Titles, ownership, and HMO, brownfield and green belt flags are available. Tenure, ownership type, area, lease length and use class filters are not. |
+| Land transactions (HMLR price paid, other) | Yes | Area search and history for a title. |
+| HMLR official documents | No | Buying and downloading the official title register or title plan. |
+| Valuation requests | No | Requesting a valuation, and the allowance that goes with it. |
+| Demographics | Partial | Five indicators. The Core menu has further indicators listed below. |
+| Crime | Yes | Monthly counts by category and sub-category. |
+| Broadband speed | No | Shown under Demographics in Core. |
+| Points of interest | Yes | Education, transport, eating and drinking, supermarkets, health. |
+| EPC certificates | Yes | Search by area. In Core, EPC rating is also a comparables filter, which MCP does not offer. |
+| Policy rates | Yes | Local Housing Allowance (BRMA/LHA), London Living Rent and Community Infrastructure Levy. |
+| Policy and constraint map layers | No | Flood zones, conservation areas, listed buildings and the other layers listed below. |
+| Local Development Plan sites | No | Adopted and emerging allocations. |
+| SHLAA sites | No | Strategic Housing Land Availability Assessment sites. |
+| Brownfield register | Partial | MCP can flag titles that sit on brownfield land. The register layer itself is not a dataset. |
+| Agent comparison | No | Which agents list or sell in an area. |
+| Title boundary map | Yes | A satellite image of one title boundary. |
+| Dataset update dates | Yes | How recent each dataset is. |
+
+## Not available
+
+### Demographic indicators
+
+`get_demographics_summary` returns total population, unemployment, household tenure, rental affordability and income by age. Core also offers these, and MCP cannot return them:
+
+| Indicator | In Core under |
+| --- | --- |
+| Population by age | Population |
+| Median age | Population |
+| Population density | Population |
+| Dwellings | Population |
+| Religion | Population |
+| Ethnicity | Population |
+| Rents vs sales (share of rental listings) | Socioeconomics |
+| Population education (qualification levels) | Socioeconomics |
+| Economic activity | Socioeconomics |
+| Distance travelled to workplace | Socioeconomics |
+| Industry people work in | Socioeconomics |
+| Mortgage affordability | Socioeconomics |
+| Accommodation type | Housing |
+| Second home status | Housing |
+| Homelessness | Deprivation |
+| Social housing waitlist | Deprivation |
+
+Core can show these as hexagon maps. MCP returns tables and time series, plus one satellite image for a title boundary. It does not draw hexagon or choropleth maps.
+
+Broadband speed for an area, including the national benchmark, sits under Demographics in Core and is not in MCP.
+
+### Policy and constraint layers
+
+Core's Policies panel includes rate lookups and map layers. MCP covers the three rate datasets: Local Housing Allowance (BRMA/LHA), London Living Rent and Community Infrastructure Levy. These layers can be drawn and searched in Core, and are not in MCP:
+
+- Flood zones and flood defences
+- Green belt as a map layer (MCP can still flag whether a title is in the green belt)
+- Areas of Outstanding Natural Beauty
+- Special Areas of Conservation
+- Nitrate sensitive areas
+- Conservation areas
+- Listed buildings, heritage at risk, scheduled monuments, world heritage sites, registered battlefields, and registered parks and gardens
+- Article 4 directions
+- Brownfield register as a map layer (MCP can still flag whether a title is on brownfield land)
+- SHLAA sites
+- Local Development Plan sites, adopted and emerging: residential, employment, mixed use, community facilities and settlement boundaries
+
+### Construction pipeline
+
+Core's planning charts split units by planning stage and units in construction by construction stage. `get_planning_pipeline_stats` covers planning stages. It has no construction-stage breakdown.
+
+### HM Land Registry documents and valuations
+
+MCP returns title data and ownership. It cannot check, buy or download official copies of the register or the title plan.
+
+Requesting a site valuation, and the allowance Core uses for those requests, is not available.
+
+### Agent comparison, Scout and Overview
+
+Agent comparison (which estate and letting agents are active in an area) is not available.
+
+Scout, the AI property search inside Core, and Overview, the generated area summary, are not available. `generate_data_report` is a different tool, so an answer from your assistant will not match a Scout conversation in Core.
+
+## Fewer options than Core
+
+These datasets exist in MCP. Filters and series that Core offers are missing, so a question that depends on one of them comes back unfiltered, or with a note that the filter is unavailable.
+
+### Comparables
+
+`search_comparables` filters on listing type (sold price, asking price, asking rent), bedrooms, property type, price range and whether to include duplicate listings. Core filters with no MCP equivalent:
+
+- Build to rent only, on asking rents
+- Student accommodation and purpose-built student accommodation
+- HMO rentals
+- Let agreed, on asking rents
+- Sold subject to contract, on asking prices
+- Shared ownership, on asking and sold prices
+- New build versus secondary stock
+- Property features such as garden, parking, balcony, lift or retirement
+- Size in square feet, and price per square foot
+- EPC rating
+- A price distribution histogram
+
+### Market trends
+
+`get_market_indicators` covers sales, rents, transactions and student rents, with bedroom, property type, build type and build-to-rent filters. Missing compared with Core:
+
+- The "Other" property category for sales and transactions
+- A shared-ownership toggle on sales and transactions
+- A purpose-built student accommodation toggle
+- Hexagon maps of any indicator
+
+### Planning
+
+`search_planning_applications` and `get_planning_pipeline_stats` filter on build-to-rent, unit count, planning stage, project status, primary sector, primary category, contractor and keywords. Core filters with no MCP equivalent:
+
+- Development type (new build, refurbishment, extension and combinations)
+- Stage group and contract stage
+- Overlap with brownfield land or the green belt
+- Planning alerts (saved searches with notifications)
+
+### Land and ownership
+
+`search_land_parcels` filters on HMO, brownfield, green belt, proprietor names and UPRN. `get_land_ownership` adds Companies House detail for one title at a time. Core filters with no MCP equivalent:
+
+- Tenure (freehold, leasehold, unknown)
+- Ownership type (business, private, council, local authority, mixed, non-profit, housing association)
+- Site area
+- Lease length
+- Planning use classes
+- Density
+- A company lookup that finds the right proprietor or contractor from a list (MCP accepts a name, and has no search to pick the company)
+
+## Core features that are not datasets
+
+These are part of the Core web app, and are outside MCP: alerts, Word, PDF, CSV and Excel exports, dashboard templates, projects and site cards, boards, and the measure tools on the map.
