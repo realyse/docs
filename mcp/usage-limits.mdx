@@ -1,0 +1,57 @@
+---
+title: "Usage limits"
+description: "How your monthly MCP allowance is counted, and what happens when you reach it."
+icon: "gauge"
+---
+
+REalyse MCP has a monthly allowance measured in **rows of data returned**. It doesn't count tool calls or requests. A search that returns 40 comparables uses 40 rows; a call that returns nothing uses none.
+
+The allowance resets at the start of each calendar month (UTC).
+
+- If you connected through the browser sign-in, the allowance belongs to you.
+- If you're using a [team API key](/mcp/authentication#team-api-keys-for-scripts), the allowance belongs to your team.
+
+## How rows are counted
+
+| Type of tool | Rows used | Tools |
+| --- | --- | --- |
+| Lookups and account | None | `resolve_location`, `resolve_radius_location`, `get_dataset_update_dates`, `get_current_user`, `get_title_plan_map` |
+| Searches and reports | One per record returned | `search_comparables`, `search_planning_applications`, `search_land_parcels`, `search_land_transactions`, `search_points_of_interest`, `search_epc_certificates`, `generate_data_report`, `paginate_data_report`, `get_land_transactions_by_title` |
+| Single-title lookups | One per call | `get_title_details`, `get_land_ownership` |
+| Trends and statistics | One per series requested | `get_market_indicators`, `get_planning_pipeline_stats`, `get_policy_rates`, `get_crime_trends` (one per crime category), `get_demographics_summary` (four, or five with an age range) |
+
+Calls that fail don't use any rows.
+
+Searches return up to 50 rows per page by default and at most 200 per page. Your assistant can ask for further pages if it needs them.
+
+## Checking your usage
+
+Every tool result includes a `quota` section with four values:
+
+| Field | Meaning |
+| --- | --- |
+| `limit` | Your monthly allowance in rows |
+| `used` | Rows used so far this month |
+| `remaining` | Rows left this month |
+| `period_end` | When the allowance resets |
+
+You can also ask your assistant "How much of my REalyse allowance have I used?" It will call `get_current_user` (not available with team API keys).
+
+When you've used 80% of your allowance, results start to include a notice. At 95% the notice becomes a warning.
+
+## When you reach the limit
+
+- If a search would return more rows than you have left, you get a shorter final page that uses up what remains.
+- Trend and statistics tools need every requested series to fit in your remaining allowance. If they don't fit, the call is refused rather than returning partial figures.
+- Once you have no rows left, data tools return a message telling you when the allowance resets. Lookup tools such as `resolve_location` keep working.
+
+If you need a higher allowance, contact your REalyse account manager.
+
+## Other limits
+
+A few tools have extra limits to protect shared services:
+
+- **Title plan maps:** `get_title_plan_map` is limited to a set number of maps per user per hour.
+- **Landmark lookups:** when `resolve_location` or `resolve_radius_location` has to geocode a landmark rather than a postcode or known place, those lookups are limited per user per hour.
+- **Land ownership:** `get_land_ownership` handles one title at a time. If it's busy, your assistant should wait and try again. Results marked as partial or truncated are incomplete.
+- **Parallel calls:** your assistant can run up to three REalyse tool calls at the same time.
