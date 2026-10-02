@@ -1,21 +1,21 @@
 ---
 title: "AI and your data"
 sidebarTitle: "AI and your data"
-description: "How REalyse MCP fits with your assistant, your subscription terms and the REalyse privacy policy."
+description: "Where REalyse MCP data is processed, how long it is kept, which subprocessors handle it, and whether it is used to train a model."
 icon: "shield-halved"
 ---
 
-You connect an assistant to your existing REalyse account. The data licence is the same one that covers REalyse Core and the API. This page describes what the connection adds: who writes the answer, what REalyse receives, and where the results go.
+You connect an assistant to your existing REalyse account. The data licence is the same one that covers REalyse Core and the API. This page describes what the connection adds: who writes the answer, what REalyse receives, where that data is processed, how long it is kept, which subprocessors handle it, and whether it is used to train a model.
 
-Read it with the terms that apply to your subscription. The standard documents on the REalyse website are the [Terms & Conditions](https://cdn.prod.website-files.com/61acde1e4b656fb305b1f189/6614d3b39bb33b0cb1c66b7c_REalyse%20-%20Terms%20of%20Use%20%28Enterprise%29%20%2805.09.2023%29.pdf), the [API Terms of Use](https://cdn.prod.website-files.com/61acde1e4b656fb305b1f189/62babacbf04e59f387888359_REalyse%2B-%2BTerms%2Bof%2BUse%2B%28API%29.pdf) and the [privacy policy](https://cdn.prod.website-files.com/61acde1e4b656fb305b1f189/63edca4f3f550933ece5a0c9_REalyse%20-%20Privacy%20Policy.pdf). If your organisation has a signed agreement, that agreement applies to you.
+Read it with the terms that apply to your subscription. The standard documents on the REalyse website are the [Terms & Conditions](https://cdn.prod.website-files.com/61acde1e4b656fb305b1f189/6614d3b39bb33b0cb1c66b7c_REalyse%20-%20Terms%20of%20Use%20%28Enterprise%29%20%2805.09.2023%29.pdf), the [API Terms of Use](https://cdn.prod.website-files.com/61acde1e4b656fb305b1f189/62babacbf04e59f387888359_REalyse%2B-%2BTerms%2Bof%2BUse%2B%28API%29.pdf) and the [privacy policy](https://cdn.prod.website-files.com/61acde1e4b656fb305b1f189/63edca4f3f550933ece5a0c9_REalyse%20-%20Privacy%20Policy.pdf). Those documents do not describe an assistant connection. If your organisation has a signed agreement, that agreement applies to you.
 
 ## What each document is for
 
 | Document | What it covers |
 | --- | --- |
 | Terms & Conditions, and the API Terms of Use | Who may use REalyse, the licence for the datasets, and the limits on reuse, resale and redistribution. |
-| Privacy policy | Personal data REalyse holds about you as a customer: your account, sign-in, billing and how you use the service, plus your rights and how to contact us. |
-| This page | What happens to a question, and to the data that comes back, when an assistant calls REalyse MCP. |
+| Privacy policy | Personal data REalyse holds about you as a customer: your account, sign-in, billing and how you use the service, plus your rights and how to contact us. It does not state where MCP data is processed, how long it is kept, which subprocessors handle it, or whether it is used to train a model. |
+| This page | What happens to a question and the data that comes back when an assistant calls REalyse MCP. |
 
 ## Who writes the answer
 
@@ -23,11 +23,19 @@ The assistant you connect is the model. That might be Claude, ChatGPT, Microsoft
 
 When the assistant needs REalyse data, it sends a tool call. REalyse runs that lookup and returns the result. The assistant then writes the reply you see. The wording is the assistant's, so two people can ask similar questions and get different write-ups.
 
-What that assistant stores, logs or uses to train its models is covered by your agreement with its provider. REalyse is not a party to that agreement. If your organisation limits training on customer content, or limits sending licensed data to a third party, set that with the assistant's provider before you connect.
+What that assistant stores or logs is covered by your agreement with its provider. REalyse is not a party to that agreement. If your organisation limits sending licensed data to a third party, set that with the assistant's provider before you connect.
+
+## Model training
+
+A direct tool call is a lookup against REalyse data. REalyse does not send that call to a model, and does not use the call or the result to train one.
+
+`generate_data_report` and `paginate_data_report` send the question and a place name to a separate analytical service, which writes the report. That service does not train its own models on the question, the place name or the report. It has opted out of training on the models it uses through Google Cloud and Amazon Web Services.
+
+Your assistant is a separate product. Whether it trains on the chat is covered by your agreement with its provider. If your organisation limits training on customer content, set that with the provider before you connect.
 
 ## What REalyse keeps
 
-REalyse records the lookup: which tool ran, and the settings sent with it, such as a place, a date range or a filter. That is the same kind of usage record as a search in REalyse Core or a call to the API.
+REalyse receives the tool call, including the settings needed to run it, such as a place, a date range or a filter. The usage log records which tool ran. A log line can include your email, user id, team and company. It does not include the question text or those settings.
 
 REalyse also keeps:
 
@@ -35,6 +43,50 @@ REalyse also keeps:
 - Location tokens from `resolve_location` and `resolve_radius_location`. They are saved against your account so a later question can reuse the same area, and they do not expire. See [Available tools](/mcp/tools).
 - Your monthly row allowance. See [Usage limits](/mcp/usage-limits).
 - A title-plan image, when the assistant asks for a map of a title boundary.
+
+## Where data is processed
+
+REalyse MCP runs in Amazon Web Services in the EU, in Ireland (region `eu-west-1`). That covers the service, the admin database, title-plan images, CloudFront and CloudWatch logs.
+
+The analytical service behind `generate_data_report` and `paginate_data_report` runs in the EU, mostly in Germany. If a component of that service is not available there, it uses another location. That location is not confirmed.
+
+Sign-in, a place-name lookup that falls back from REalyse's own place data, and error reports use other providers. Their regions are not confirmed. They are named under [Subprocessors](#subprocessors).
+
+## How long data is kept
+
+| Record | How long |
+| --- | --- |
+| Sign-in session | Until it expires, or until you disconnect the assistant. See [Sign-in and access](/mcp/authentication). |
+| Location tokens | Kept on your account. They do not expire. |
+| Monthly row allowance | Counted for the calendar month (UTC), then the count starts again. See [Usage limits](/mcp/usage-limits). |
+| Title-plan image | Stored with the account. No retention period is set. |
+| Operational logs | Kept until they are deleted. No retention period is set. A line names the tool and can include your email, user id, team and company. It does not include the question text or the tool arguments. |
+| Questions and answers on the analytical service | For as long as the account with that service is active. |
+| Traces of report calls | 3 months. |
+
+## Subprocessors
+
+The REalyse API, the admin database and CloudFront run in REalyse's own Amazon Web Services account in `eu-west-1`. They are not separate processors.
+
+| Processor | What it receives | Where |
+| --- | --- | --- |
+| Amazon Web Services | The service, the admin database, title-plan images, CloudFront and CloudWatch logs | EU (Ireland, `eu-west-1`) |
+| Auth0 | Sign-in, including Google and Microsoft login | Not confirmed |
+| Google Maps Platform | A place name, when REalyse cannot resolve it from its own place data, and the static map of a title boundary | Not confirmed |
+| Sentry | Error reports. Personal data is not captured by default. A console log that includes an email can still be sent. | Not confirmed |
+| Analytical service | Only `generate_data_report` and `paginate_data_report`: the question, a place name, and a token with your user id, email, email domain, team id, company id and company type | EU, mostly Germany. Another location may be used if a component is unavailable there. That location is not confirmed. |
+
+Google and Microsoft see a social sign-in through Auth0. They do not see the property queries.
+
+When a report tool runs, the analytical service sends that call to these processors:
+
+| Processor | What it is used for | Where |
+| --- | --- | --- |
+| Amazon Web Services | AI inference | Europe |
+| Google Cloud Platform | Hosting and AI inference | Europe |
+| Supabase | The application database. Questions and answers stay for the life of the account. | Europe |
+| Langfuse | Monitoring of the report call. Traces are kept for 3 months. | Europe |
+| Sentry | Error monitoring for that service, separate from REalyse error reports | Europe |
 
 ## The data in the result
 
@@ -46,7 +98,7 @@ The result goes back to your assistant so it can write the answer. Your data lic
 
 ## Analytical reports
 
-Most tools call REalyse data directly. `generate_data_report` and `paginate_data_report` work differently. They send the question and a place name to a separate analytical service, which chooses and combines datasets and returns a report. They work from a place name rather than a location token.
+Most tools call REalyse data directly. `generate_data_report` and `paginate_data_report` work differently. They send the question and a place name to a separate analytical service, which chooses and combines datasets and returns a report. They work from a place name rather than a location token. Where that service runs, how long it keeps the question and the report, and which subprocessors it uses are covered in [Where data is processed](#where-data-is-processed), [How long data is kept](#how-long-data-is-kept) and [Subprocessors](#subprocessors).
 
 The report is still REalyse data. Ask the assistant to check `get_dataset_update_dates` when you need to know how current the figures are. [Data coverage](/mcp/data-coverage) explains what that report cannot fill in.
 
