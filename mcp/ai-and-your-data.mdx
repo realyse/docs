@@ -62,7 +62,7 @@ Sign-in is handled by Auth0 in the UK. Error reports are handled by Sentry in th
 | Title-plan image | Stored with the account. No retention period is set. |
 | Operational logs | Kept until they are deleted. No retention period is set. A line names the tool and can include your email, user id, team and company. It does not include the question text or the tool arguments. |
 | Questions and answers on the analytical service | For as long as the account with that service is active. |
-| Traces of report calls | 3 months. |
+| Traces of `generate_data_report` and `paginate_data_report` calls on the analytical service | 3 months. |
 
 ## Subprocessors
 
@@ -84,7 +84,7 @@ When a report tool runs, the analytical service sends that call to these process
 | Amazon Web Services | AI inference | Europe |
 | Google Cloud Platform | Hosting and AI inference | Europe |
 | Supabase | The application database. Questions and answers stay for as long as the account with that service is active. | Europe |
-| Langfuse | Monitoring of the report call. Traces are kept for 3 months. | Europe |
+| Langfuse | Monitoring of `generate_data_report` and `paginate_data_report`. Traces are kept for 3 months. | Europe |
 | Sentry | Error monitoring for that service, separate from REalyse error reports | Europe |
 
 ## The data in the result
