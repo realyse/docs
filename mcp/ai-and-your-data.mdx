@@ -48,9 +48,9 @@ REalyse also keeps:
 
 REalyse MCP runs in Amazon Web Services in the EU, in Ireland (region `eu-west-1`). That covers the service, the admin database, title-plan images, CloudFront and CloudWatch logs.
 
-The analytical service behind `generate_data_report` and `paginate_data_report` runs in the EU, mostly in Germany. If a component of that service is not available there, it uses another location. That location is not confirmed.
+The analytical service behind `generate_data_report` and `paginate_data_report` runs in Europe.
 
-Sign-in, a place-name lookup that falls back from REalyse's own place data, and error reports use other providers. Their regions are not confirmed. They are named under [Subprocessors](#subprocessors).
+Sign-in is handled by Auth0 in the UK. Error reports are handled by Sentry in the USA. Both are listed under [Subprocessors](#subprocessors).
 
 ## How long data is kept
 
@@ -70,11 +70,10 @@ The REalyse API, the admin database and CloudFront run in REalyse's own Amazon W
 
 | Processor | What it receives | Where |
 | --- | --- | --- |
-| Amazon Web Services | The service, the admin database, title-plan images, CloudFront and CloudWatch logs | EU (Ireland, `eu-west-1`) |
-| Auth0 | Sign-in, including Google and Microsoft login | Not confirmed |
-| Google Maps Platform | A place name, when REalyse cannot resolve it from its own place data, and the static map of a title boundary | Not confirmed |
-| Sentry | Error reports. Personal data is not captured by default. A console log that includes an email can still be sent. | Not confirmed |
-| Analytical service | Only `generate_data_report` and `paginate_data_report`: the question, a place name, and a token with your user id, email, email domain, team id, company id and company type | EU, mostly Germany. Another location may be used if a component is unavailable there. That location is not confirmed. |
+| Amazon Web Services | The service, the admin database, title-plan images, CloudFront and CloudWatch logs | Europe |
+| Auth0 | Sign-in, including Google and Microsoft login | UK |
+| Sentry | Error reports. Personal data is not captured by default. A console log that includes an email can still be sent. | USA |
+| Analytical service | Only `generate_data_report` and `paginate_data_report`: the question, a place name, and a token with your user id, email, email domain, team id, company id and company type | Europe |
 
 Google and Microsoft see a social sign-in through Auth0. They do not see the property queries.
 
