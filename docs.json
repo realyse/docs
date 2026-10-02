@@ -27,6 +27,7 @@
         "product": "Core",
         "icon": "chart-mixed",
         "description": "Dashboards for UK property, land and planning data",
+        "hidden": true,
         "groups": [
           {
             "group": "Get started",
@@ -84,6 +85,7 @@
         "product": "Pulse",
         "icon": "wave-pulse",
         "description": "Property valuations, rental reports and market trends",
+        "hidden": true,
         "groups": [
           {
             "group": "Get started",
@@ -133,7 +135,7 @@
       "vscode"
     ]
   },
-  "description": "Help and guides for REalyse Core, REalyse MCP and REalyse Pulse.",
+  "description": "Help and guides for REalyse MCP.",
   "fonts": {
     "family": "Lato"
   }
